@@ -1,0 +1,34 @@
+#app {
+  background-color: white;
+}
+
+body {
+  background-color: green;
+}
+
+.box {
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  background-color: white;
+  vertical-align: 25px;
+  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
+  display: inline-block;
+}
+
+.grey {
+  background-color: grey;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.black {
+  background-color: black;
+}
+
+.white {
+  background-color: white;
+}

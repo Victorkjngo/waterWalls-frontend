@@ -20,7 +20,6 @@ const findMaxWaterBetweenWalls = (walls) => {
     return uncutArea;
   };
 
-  
   // constraints:
     // none
 
@@ -39,4 +38,4 @@ const findMaxWaterBetweenWalls = (walls) => {
   return result;
 };
 
-module.exports = findMaxWaterBetweenWalls;
+// module.exports = findMaxWaterBetweenWalls;

@@ -1,0 +1,27 @@
+{
+  "name": "water-frontend",
+  "version": "1.0.0",
+  "description": "## Rationale behind second repo > Distinct repo w/ front-end and w/o from each other!",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victorkjngo/waterWalls-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victorkjngo/waterWalls-frontend/issues"
+  },
+  "homepage": "https://github.com/Victorkjngo/waterWalls-frontend#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "path": "^0.12.7"
+  }
+}
