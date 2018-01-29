@@ -24,30 +24,21 @@ var findWater = (walls) => {
     var startingWallHeight = startingWallDetails[0];
     var startingWallIndex = startingWallDetails[1]
 
-    console.log('Starting wall height:', startingWallHeight, 'starting index:', startingWallIndex);
     for (let i = startingWallIndex + 2; i < walls.length; i++) {
       var currWallHeight = walls[i];
-      console.log('CurrWallHeight', currWallHeight, 'i', i);
       if (currWallHeight >= startingWallHeight) {
-        console.log('Second wall much larger!');
         waterBounds = [startingWallIndex, i];
-        // debugger;
         break;
       } else if (currWallHeight > walls[i - 1] && (waterBounds[1] === -1 || currWallHeight > walls[waterBounds[1]])) {
-        console.log('This wall higher than prev AND higher than the last one I remember!');
         waterBounds = [startingWallIndex, i];
       } 
-      // debugger;
     }
 
-    console.log('Found opposite wall. Waterboudns currently', waterBounds);
     waterBounds.push(Math.min(walls[waterBounds[0]], walls[waterBounds[1]]));
     startingWallDetails = [walls[waterBounds[1]], waterBounds[1]];
     results.push(waterBounds);
     waterBounds = [waterBounds[1], -1];
-    console.log('WaterBounds', waterBounds, 'Setting starting wall to', startingWallDetails);
   }
-  console.log('RETURNING THIS:', results);
   return results;
 
 };

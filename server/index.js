@@ -2,8 +2,11 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const port = process.env.PORT || 3000;
 const routes = require('./routes/index.js');
+
+const port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '../client')));
 

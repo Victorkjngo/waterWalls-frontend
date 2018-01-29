@@ -1,8 +1,31 @@
 var input = [5, 3, 7, 2, 6, 4, 5, 9, 1, 2]; // Height of walls
 var output = [3, 8, 11]; // Most water trapped between 2 walls  
+var rows = new Array(10);
 
-window.onload = function () {
+const executePage = () => {
+  console.log('Window loaded starting script');
   var $app = $('#app');
+  var $form = $('#form');
+  var $input = $('#form > input[type="text"');
+
+  $form.on('submit', function(e){
+    var value = $input.val();
+    e.preventDefault();
+
+    console.log('Value:', input);
+
+    if (value) {
+      $.ajax('/findMaxWalls', {
+        data: {
+          body: value
+        },
+        contentType: 'application/json'
+      });
+    }
+    console.log('Input now', input);
+
+    changeBoard();
+  });
 
   const populateColumn = (wallHeight, waterHeight, colIndex) => {
     for (let i = rows.length - 1; i >= 0; i--) {
@@ -46,15 +69,6 @@ window.onload = function () {
     }
   };
 
-  console.log(findWater(input));
-  console.log(findMaxWaterBetweenWalls(input));
-  var rows = new Array(10);
-  for (let i = 0; i < rows.length; i++) {
-    rows[i] = $('<div class="row"><div/>');
-  }
-
-  
-
   /*
  -------------
   BOARD POPULATION
@@ -72,31 +86,46 @@ window.onload = function () {
   // render walls (given input + output)
     // 
   */
-  var count = 1;
-  for (let i = rows.length - 1; i >= 0; i--) {
-    rows[i].append(makeBox(count));
-    count++;
-  } 
+  function changeBoard () {
+    console.log('Changeboard loadded');
+    rows = new Array(10);
 
-  for (let j = 0; j < input.length; j++) {
-    let wallHeight = input[j];
-    let waterHeight = 0;
-    let waterBounds = findWater(input);
-
-    for (let i = 0; i < waterBounds.length; i++) {
-      let waterBound = waterBounds[i];
-
-      if (isInRange(waterBound[0], waterBound[1], j)) {
-        waterHeight = waterBound[2] - wallHeight;
-        break;
-      }
+    for (let i = 0; i < rows.length; i++) {
+      rows[i] = $('<div class="row"><div/>');
     }
 
-    populateColumn(wallHeight, waterHeight, j);
+    var count = 1;
+
+    for (let i = rows.length - 1; i >= 0; i--) {
+      rows[i].append(makeBox(count));
+      count++;
+    } 
+
+    for (let j = 0; j < input.length; j++) {
+      let wallHeight = input[j];
+      let waterHeight = 0;
+      let waterBounds = findWater(input);
+
+      for (let i = 0; i < waterBounds.length; i++) {
+        let waterBound = waterBounds[i];
+
+        if (isInRange(waterBound[0], waterBound[1], j)) {
+          waterHeight = waterBound[2] - wallHeight;
+          break;
+        }
+      }
+
+      populateColumn(wallHeight, waterHeight, j);
+    }
+  
+
+
+    console.log('Rows', rows);
+    $app.html(rows);
   }
- 
-
-
-  console.log('Rows', rows);
-  $app.html(rows)
+  
 };
+
+$(document).ready(function () {
+  executePage();
+});
